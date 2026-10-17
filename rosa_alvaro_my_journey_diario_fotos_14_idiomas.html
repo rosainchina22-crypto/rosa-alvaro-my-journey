@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="O espaço pessoal de Rosa Álvaro: jornada, aprendizagens e projetos.">
+  <title>Rosa Álvaro — My Journey</title>
+  <style>
+    :root {
+      --pink: #e9bdca;
+      --pink-dark: #8b5367;
+      --cream: #fbf5ef;
+      --beige: #eadccf;
+      --ink: #49363d;
+      --muted: #78666b;
+      --white: #fffdfb;
+      --line: #eadde0;
+      --shadow: 0 14px 38px rgba(94, 57, 71, .08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    .container { width: min(1080px, 92%); margin: 0 auto; }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(251, 245, 239, .94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      min-height: 72px; display: flex; align-items: center;
+      justify-content: space-between; gap: 18px;
+    }
+    .brand { text-decoration: none; font-weight: 800; letter-spacing: -.04em; font-size: 1.15rem; }
+    .brand span { color: var(--pink-dark); }
+    nav { display: flex; gap: 18px; align-items: center; }
+    nav a { text-decoration: none; font-size: .92rem; color: var(--muted); }
+    nav a:hover { color: var(--pink-dark); }
+    .lang {
+      border: 1px solid var(--pink-dark); border-radius: 999px;
+      background: var(--white); color: var(--pink-dark);
+      padding: 8px 13px; font: inherit; font-weight: 700; cursor: pointer;
+    }
+    .language-picker-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    .language-picker { max-width: 190px; }
+    .translate-widget { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    .goog-te-banner-frame, .skiptranslate { display: none !important; }
+    body { top: 0 !important; }
+    .hero { padding: 76px 0 58px; }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 42px; align-items: center; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .16em; color: var(--pink-dark); font-size: .75rem; font-weight: 800; }
+    h1 { font-size: clamp(2.7rem, 7vw, 5.3rem); line-height: .99; letter-spacing: -.065em; margin: 14px 0 20px; }
+    h1 em { color: var(--pink-dark); font-style: normal; }
+    .lead { font-size: 1.08rem; max-width: 600px; color: var(--muted); }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+    .btn { display: inline-block; border-radius: 999px; padding: 12px 18px; text-decoration: none; font-weight: 750; border: 1px solid var(--pink-dark); }
+    .btn-primary { background: var(--pink-dark); color: white; }
+    .btn-secondary { background: var(--white); color: var(--pink-dark); }
+    .hero-card {
+      background: linear-gradient(145deg, #f4dce3, #f8eadf 68%, #fffaf5);
+      min-height: 340px; border-radius: 34px; padding: 28px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,.8);
+    }
+    .orb { width: 132px; height: 132px; border-radius: 50%; margin: 16px auto 22px; background: radial-gradient(circle at 32% 28%, #fff8f5, #d99eb1 58%, #b87991); box-shadow: 0 18px 38px #b8799140; }
+    .hero-card blockquote { margin: 0; font-size: 1.2rem; font-weight: 700; text-align: center; }
+    .hero-card small { text-align: center; color: var(--muted); }
+    section { padding: 58px 0; }
+    .section-head { max-width: 650px; margin-bottom: 26px; }
+    h2 { font-size: clamp(1.8rem, 4vw, 2.7rem); line-height: 1.1; letter-spacing: -.04em; margin: 8px 0 12px; }
+    .section-head p, .card p { color: var(--muted); }
+    .about-panel { background: var(--white); border: 1px solid var(--line); border-radius: 24px; padding: 28px; box-shadow: var(--shadow); }
+    .profile-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 22px 0 10px; }
+    .profile-fact { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(135deg, #fffaf8, #f8e9ed); }
+    .profile-fact span { color: var(--muted); font-size: .88rem; }
+    .profile-fact strong { color: var(--pink-dark); font-size: 1.04rem; }
+    .profile-privacy { margin: 14px 0 18px; color: var(--muted); font-size: .88rem; }
+
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { background: var(--white); border: 1px solid var(--line); border-radius: 22px; padding: 22px; box-shadow: var(--shadow); }
+    .icon { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 14px; background: #f7e5ea; font-size: 1.25rem; }
+    .card h3 { margin: 16px 0 8px; }
+    .tag { display: inline-block; font-size: .78rem; color: var(--pink-dark); background: #f7e5ea; border-radius: 999px; padding: 5px 10px; margin: 4px 4px 0 0; }
+    .timeline { border-left: 2px solid var(--pink); padding-left: 22px; display: grid; gap: 20px; }
+    .timeline-item { position: relative; background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; }
+    .timeline-item::before { content: ""; width: 11px; height: 11px; border-radius: 50%; background: var(--pink-dark); position: absolute; left: -29px; top: 24px; }
+    .timeline-item h3 { margin: 0 0 5px; }
+    .timeline-item p { margin: 0; color: var(--muted); }
+    .note { border-radius: 20px; padding: 20px; background: #f4e6dc; color: #614c4b; }
+    footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted); font-size: .9rem; }
+    footer .container { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; }
+    :focus-visible { outline: 3px solid #b87991; outline-offset: 3px; }
+
+    .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .photo-card { overflow: hidden; background: var(--white); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); }
+    .photo-placeholder {
+      min-height: 150px; display: grid; place-items: center; text-align: center; padding: 18px;
+      background: linear-gradient(145deg, #f6e1e7, #f7eee5);
+      color: var(--pink-dark);
+    }
+    .photo-placeholder span { display: block; font-size: 2rem; margin-bottom: 6px; }
+    .photo-card img { width: 100%; height: 190px; object-fit: cover; display: block; }
+    .photo-card figcaption { padding: 12px 14px; color: var(--muted); font-size: .9rem; }
+
+    .photo-card img, .photo-card video { width: 100%; max-height: 420px; aspect-ratio: 4 / 3; object-fit: cover; display: block; background: #f4e6dc; }
+    .media-tools { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 18px; align-items: center; }
+    .media-add-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 999px; padding: 12px 18px; background: var(--pink-dark); color: white; font: inherit; font-weight: 750; cursor: pointer; }
+    .media-help { color: var(--muted); font-size: .88rem; }
+    .media-upload-form { display: none; gap: 12px; background: var(--white); border: 1px solid var(--line); border-radius: 22px; padding: 20px; box-shadow: var(--shadow); margin-bottom: 20px; }
+    .media-upload-form.open { display: grid; }
+    .media-upload-form label { font-weight: 700; font-size: .92rem; }
+    .media-upload-form input[type="text"], .media-upload-form input[type="file"] { width: 100%; padding: 10px; border: 1px solid #d9c7cd; border-radius: 12px; background: #fffdfb; color: var(--ink); font: inherit; }
+    .media-upload-actions { display: flex; flex-wrap: wrap; gap: 9px; }
+    .media-upload-actions button { border: 0; border-radius: 999px; padding: 11px 16px; background: var(--pink-dark); color: white; font: inherit; font-weight: 750; cursor: pointer; }
+    .media-upload-actions .secondary { background: #fffaf8; color: var(--ink); border: 1px solid #d9c7cd; }
+    .media-card { position: relative; }
+    .media-card .remove-media { margin: 0 12px 12px; border: 1px solid #e8bdc8; border-radius: 999px; padding: 7px 12px; background: #fffaf8; color: #9b2c48; font: inherit; cursor: pointer; }
+    .media-status { min-height: 1.4em; color: var(--pink-dark); font-size: .9rem; }
+    .journal-form { display: grid; gap: 12px; background: var(--white); border: 1px solid var(--line); border-radius: 22px; padding: 20px; box-shadow: var(--shadow); margin-bottom: 22px; }
+    .journal-form label { font-weight: 700; font-size: .92rem; }
+    .journal-form input, .journal-form textarea, .journal-form select {
+      width: 100%; padding: 11px 12px; border: 1px solid #d9c7cd; border-radius: 12px;
+      background: #fffdfb; color: var(--ink); font: inherit;
+    }
+    .journal-form textarea { min-height: 105px; resize: vertical; }
+    .journal-form button { justify-self: start; border: 0; border-radius: 999px; background: var(--pink-dark); color: white; padding: 12px 18px; font: inherit; font-weight: 750; cursor: pointer; }
+    .journal-list { display: grid; gap: 14px; }
+    .journal-entry { background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 18px; }
+    .journal-entry h3 { margin: 0 0 4px; }
+    .journal-meta { color: var(--pink-dark); font-size: .82rem; font-weight: 700; margin-bottom: 8px; }
+    .journal-entry p { margin: 0; white-space: pre-wrap; color: var(--muted); }
+    .empty-state { color: var(--muted); background: #fffaf6; border: 1px dashed #d9c7cd; border-radius: 16px; padding: 18px; }
+
+    @media (max-width: 760px) {
+      .nav { flex-wrap: wrap; padding: 14px 0; }
+      nav { order: 3; width: 100%; overflow-x: auto; padding-bottom: 4px; }
+      nav a { white-space: nowrap; }
+      .hero { padding-top: 48px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+      .hero-card { min-height: 260px; }
+      .grid { grid-template-columns: 1fr; }
+      .profile-facts { grid-template-columns: 1fr; }
+      .photo-grid { grid-template-columns: 1fr; }
+      .photo-card img, .photo-card video { max-height: 320px; }
+      section { padding: 42px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home">rosa<span>.</span>álvaro</a>
+      <nav aria-label="Navegação principal">
+        <a href="#about" data-pt="Sobre mim" data-en="About me">Sobre mim</a>
+        <a href="#journey" data-pt="Jornada" data-en="Journey">Jornada</a>
+        <a href="#projects" data-pt="Projetos" data-en="Projects">Projetos</a>
+        <a href="#photos" data-pt="Fotografias" data-en="Photos">Fotografias</a>
+        <a href="#journal" data-pt="Diário" data-en="Journal">Diário</a>
+        <a href="#learning" data-pt="Aprendizagem" data-en="Learning">Aprendizagem</a>
+      </nav>
+      <label class="language-picker-label" for="languageSelect">Idioma / Language</label>
+      <select class="lang language-picker" id="languageSelect" aria-label="Escolher idioma">
+        <option value="pt">Português</option>
+        <option value="en">English (Inglês)</option>
+        <option value="fr">Français (Francês)</option>
+        <option value="es">Español (Espanhol)</option>
+        <option value="ko">한국어 (Coreano)</option>
+        <option value="zh-CN">中文 / 普通话 (Mandarim)</option>
+        <option value="ja">日本語 (Japonês)</option>
+        <option value="it">Italiano</option>
+        <option value="ru">Русский (Russo)</option>
+        <option value="tr">Türkçe (Turco)</option>
+        <option value="nl">Nederlands (Neerlandês)</option>
+        <option value="de">Deutsch (Alemão)</option>
+        <option value="ar">العربية (Árabe)</option>
+        <option value="hi">हिन्दी (Hindi)</option>
+      </select>
+      <button class="lang" id="languageButton" type="button" aria-label="Mudar idioma" hidden>EN</button>
+      <div id="google_translate_element" class="translate-widget" aria-hidden="true"></div>
+      <span id="languageNotice" hidden>O tradutor precisa de internet. Tenta novamente em instantes.</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow" data-pt="Bem-vinda ao meu mundo" data-en="Welcome to my world">Bem-vinda ao meu mundo</div>
+          <h1 data-pt-html="A aprender hoje,<br>a construir <em>amanhã.</em>" data-en-html="Learning today,<br>building <em>tomorrow.</em>">A aprender hoje,<br>a construir <em>amanhã.</em></h1>
+          <p class="lead" data-pt="Olá! Sou a Rosa Álvaro, uma estudante curiosa que gosta de aprender idiomas, descobrir culturas, explorar tecnologia e expressar criatividade através da música, da dança e de novas ideias. Criei este espaço para documentar o meu progresso, partilhar projetos e mostrar que cada grande objetivo começa com pequenos passos." data-en="Hi! I’m Rosa Álvaro, a curious student who enjoys learning languages, discovering cultures, exploring technology, and expressing creativity through music, dance, and new ideas. I created this space to document my progress, share projects, and show that every big goal begins with small steps.">Olá! Sou a Rosa Álvaro, uma estudante curiosa que gosta de aprender idiomas, descobrir culturas, explorar tecnologia e expressar criatividade através da música, da dança e de novas ideias. Criei este espaço para documentar o meu progresso, partilhar projetos e mostrar que cada grande objetivo começa com pequenos passos.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#journey" data-pt="Acompanhar a jornada" data-en="Follow my journey">Acompanhar a jornada</a>
+            <a class="btn btn-secondary" href="#projects" data-pt="Ver projetos" data-en="Explore projects">Ver projetos</a>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="Frase inspiradora">
+          <div class="orb" aria-hidden="true"></div>
+          <blockquote data-pt="“Não preciso de ter tudo descoberto. Só preciso de continuar a aprender.”" data-en="“I don't need to have it all figured out. I just need to keep learning.”">“Não preciso de ter tudo descoberto. Só preciso de continuar a aprender.”</blockquote>
+          <small>ROSA ÁLVARO · MY JOURNEY</small>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow" data-pt="Um pouco sobre mim" data-en="A little about me">Um pouco sobre mim</div>
+          <h2 data-pt="Prazer, sou a Rosa Álvaro." data-en="Nice to meet you, I’m Rosa Álvaro.">Prazer, sou a Rosa Álvaro.</h2>
+        </div>
+        <div class="about-panel">
+          <p data-pt="Sou uma jovem com grandes sonhos e vontade de trabalhar para os realizar. Quero desenvolver os meus conhecimentos de idiomas, aprender mais sobre tecnologia e robótica e conhecer culturas e lugares diferentes. Estou a construir o meu caminho passo a passo, e este site será o meu diário de aprendizagem e portfólio: um lugar para guardar ideias, registar conquistas e mostrar os projetos que for criando." data-en="I’m a young person with big dreams and the determination to work toward them. I want to grow my language skills, learn more about technology and robotics, and discover different cultures and places. I’m building my path one step at a time, and this website will be my learning journal and portfolio: a place to keep ideas, record milestones, and share the projects I create.">Sou uma estudante que gosta de aprender e experimentar coisas novas. Tenho interesse em idiomas, tecnologia, programação e robótica, mas também em música, dança, desenho e culturas do mundo. Ainda estou no início de muitos destes caminhos — e está tudo bem. Quero usar este site como um diário de aprendizagem e um portfólio onde possa guardar ideias, registar conquistas e mostrar os projetos que for criando.</p>
+          <div class="profile-facts" aria-label="Informações sobre mim">
+            <div class="profile-fact"><span data-pt="Idade" data-en="Age">Idade</span><strong data-pt="16 anos" data-en="16 years old">16 anos</strong></div>
+            <div class="profile-fact"><span data-pt="País de origem" data-en="Country of origin">País de origem</span><strong>Angola</strong></div>
+            <div class="profile-fact"><span data-pt="Província onde nasci" data-en="Province where I was born">Província onde nasci</span><strong>Cabinda</strong></div>
+            <div class="profile-fact"><span data-pt="Cidade onde estudo atualmente" data-en="City where I currently study">Cidade onde estudo atualmente</span><strong data-pt="Kinshasa, RDC" data-en="Kinshasa, DR Congo">Kinshasa, RDC</strong></div>
+          </div>
+          <p class="profile-privacy" data-pt="Por privacidade, não partilho a minha data de nascimento nem o nome exato da minha escola neste site." data-en="For privacy, I do not share my date of birth or the exact name of my school on this website.">Por privacidade, não partilho a minha data de nascimento nem o nome exato da minha escola neste site.</p>
+          <div>
+            <span class="tag" data-pt="Idiomas" data-en="Languages">Idiomas</span><span class="tag" data-pt="Tecnologia" data-en="Technology">Tecnologia</span><span class="tag" data-pt="Robótica" data-en="Robotics">Robótica</span><span class="tag" data-pt="Culturas e viagens" data-en="Cultures & travel">Culturas e viagens</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="journey">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow" data-pt="Passo a passo" data-en="Step by step">Passo a passo</div>
+          <h2 data-pt="A minha jornada" data-en="My journey">A minha jornada</h2>
+          <p data-pt="Este espaço vai crescer comigo. Posso acrescentar novas entradas sempre que aprender algo ou alcançar uma pequena meta." data-en="This space will grow with me. I can add new entries whenever I learn something or reach a small goal.">Este espaço vai crescer comigo. Posso acrescentar novas entradas sempre que aprender algo ou alcançar uma pequena meta.</p>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item">
+            <h3 data-pt="O começo — criar o meu site" data-en="The beginning — building my website">O começo — criar o meu site</h3>
+            <p data-pt="Estou a aprender HTML, CSS e JavaScript ao construir o meu primeiro portfólio." data-en="I'm learning HTML, CSS, and JavaScript while building my first portfolio.">Estou a aprender HTML, CSS e JavaScript ao construir o meu primeiro portfólio.</p>
+          </article>
+          <article class="timeline-item">
+            <h3 data-pt="Próxima meta — atualizar esta página" data-en="Next goal — update this page">Próxima meta — atualizar esta página</h3>
+            <p data-pt="Vou registar uma coisa nova que aprendi, um desafio que resolvi ou um projeto que comecei." data-en="I'll record something new I learned, a challenge I solved, or a project I started.">Vou registar uma coisa nova que aprendi, um desafio que resolvi ou um projeto que comecei.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow" data-pt="Feito por mim" data-en="Made by me">Feito por mim</div>
+          <h2 data-pt="Os meus projetos" data-en="My projects">Os meus projetos</h2>
+          <p data-pt="Por enquanto, este site é o meu primeiro projeto. Mais cartões podem ser adicionados à medida que crio novas coisas." data-en="For now, this website is my first project. I can add more cards as I create new things.">Por enquanto, este site é o meu primeiro projeto. Mais cartões podem ser adicionados à medida que crio novas coisas.</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <div class="icon" aria-hidden="true">🌷</div>
+            <h3 data-pt="O meu site pessoal" data-en="My personal website">O meu site pessoal</h3>
+            <p data-pt="Um espaço bilingue para documentar a minha jornada e as minhas aprendizagens." data-en="A bilingual space to document my journey and learning.">Um espaço bilingue para documentar a minha jornada e as minhas aprendizagens.</p>
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">🤖</div>
+            <h3 data-pt="Projeto de robótica" data-en="Robotics project">Projeto de robótica</h3>
+            <p data-pt="Ainda por começar — aqui vou colocar a ideia, as etapas e os resultados." data-en="Not started yet — I'll add the idea, steps, and results here.">Ainda por começar — aqui vou colocar a ideia, as etapas e os resultados.</p>
+            <span class="tag">Em breve / Coming soon</span>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">📚</div>
+            <h3 data-pt="Diário de aprendizagem" data-en="Learning log">Diário de aprendizagem</h3>
+            <p data-pt="Notas sobre idiomas, programação e outras competências que estou a desenvolver." data-en="Notes about languages, coding, and other skills I'm developing.">Notas sobre idiomas, programação e outras competências que estou a desenvolver.</p>
+            <span class="tag" data-pt="Em progresso" data-en="In progress">Em progresso</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="photos">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow" data-pt="Momentos e inspiração" data-en="Moments & inspiration">Momentos e inspiração</div>
+          <h2 data-pt="As minhas fotografias" data-en="My photos">As minhas fotografias</h2>
+          <p data-pt="Este espaço é teu: podes substituir os exemplos pelas tuas próprias fotografias. Escolhe imagens que te sintas confortável em partilhar publicamente." data-en="This space is yours: you can replace the examples with your own photos. Choose images you feel comfortable sharing publicly.">Este espaço é teu: podes substituir os exemplos pelas tuas próprias fotografias. Escolhe imagens que te sintas confortável em partilhar publicamente.</p>
+        </div>
+        <div class="media-tools">
+          <button class="media-add-button" id="openMediaForm" type="button" aria-expanded="false" aria-controls="mediaUploadForm"><span aria-hidden="true">＋</span><span data-pt="Adicionar fotografia ou vídeo" data-en="Add photo or video">Adicionar fotografia ou vídeo</span></button>
+          <span class="media-help" data-pt="Escolhe um ficheiro do teu telemóvel e dá-lhe um título." data-en="Choose a file from your phone and give it a title.">Escolhe um ficheiro do teu telemóvel e dá-lhe um título.</span>
+        </div>
+        <form class="media-upload-form" id="mediaUploadForm">
+          <div>
+            <label for="mediaFile" data-pt="Escolher fotografia ou vídeo" data-en="Choose a photo or video">Escolher fotografia ou vídeo</label>
+            <input id="mediaFile" name="mediaFile" type="file" accept="image/*,video/*" required>
+            <small data-pt="Fotografias: JPG, PNG, WEBP ou formatos suportados pelo telemóvel. Vídeos: até 15 minutos. Ficheiros grandes podem exceder o espaço disponível no navegador." data-en="Photos: JPG, PNG, WEBP or formats supported by your phone. Videos: up to 15 minutes. Large files may exceed browser storage.">Fotografias: JPG, PNG, WEBP ou formatos suportados pelo telemóvel. Vídeos: até 15 minutos. Ficheiros grandes podem exceder o espaço disponível no navegador.</small>
+          </div>
+          <div>
+            <label for="mediaCaption" data-pt="Título ou legenda" data-en="Title or caption">Título ou legenda</label>
+            <input id="mediaCaption" name="mediaCaption" type="text" maxlength="100" placeholder="Ex.: A estudar programação" data-pt-placeholder="Ex.: A estudar programação" data-en-placeholder="E.g. Studying programming">
+          </div>
+          <div class="media-upload-actions">
+            <button type="submit" data-pt="Adicionar à galeria" data-en="Add to gallery">Adicionar à galeria</button>
+            <button type="button" class="secondary" id="cancelMediaForm" data-pt="Cancelar" data-en="Cancel">Cancelar</button>
+          </div>
+          <p class="media-status" id="mediaStatus" role="status" aria-live="polite"></p>
+        </form>
+        <div class="photo-grid" id="photoGrid">
+          <figure class="photo-card">
+            <div class="photo-placeholder"><div><span>📚</span><strong data-pt="Os meus estudos" data-en="My studies">Os meus estudos</strong><br><small data-pt="Adiciona as tuas próprias fotografias acima" data-en="Add your own photos above">Adiciona as tuas próprias fotografias acima</small></div></div>
+            <figcaption data-pt="Um cantinho de estudo ou uma nova aprendizagem." data-en="A study corner or something new you learned.">Um cantinho de estudo ou uma nova aprendizagem.</figcaption>
+          </figure>
+          <figure class="photo-card">
+            <div class="photo-placeholder"><div><span>💻</span><strong data-pt="A criar projetos" data-en="Building projects">A criar projetos</strong><br><small data-pt="Adiciona as tuas próprias fotografias acima" data-en="Add your own photos above">Adiciona as tuas próprias fotografias acima</small></div></div>
+            <figcaption data-pt="O teu espaço de programação ou um projeto em andamento." data-en="Your coding space or a project in progress.">O teu espaço de programação ou um projeto em andamento.</figcaption>
+          </figure>
+          <figure class="photo-card">
+            <div class="photo-placeholder"><div><span>🌍</span><strong data-pt="O mundo que descubro" data-en="The world I discover">O mundo que descubro</strong><br><small data-pt="Adiciona as tuas próprias fotografias acima" data-en="Add your own photos above">Adiciona as tuas próprias fotografias acima</small></div></div>
+            <figcaption data-pt="Culturas, lugares e coisas que te inspiram." data-en="Cultures, places, and things that inspire you.">Culturas, lugares e coisas que te inspiram.</figcaption>
+          </figure>
+        </div>
+        <p class="note" style="margin-top:16px" data-pt="Importante: nesta versão, as fotografias e os vídeos adicionados ficam guardados apenas neste navegador e dispositivo; não são enviados para a internet nem ficam visíveis para outras pessoas. Ao publicar o site, precisaremos de preparar um serviço de armazenamento para que a galeria seja partilhada com os visitantes. Não publiques imagens com morada, escola, documentos ou outros dados privados." data-en="Important: in this version, added photos and videos are saved only in this browser and device; they are not uploaded to the internet or visible to other people. Before publishing the site, we will need storage hosting so the gallery can be shared with visitors. Avoid media showing your address, school, documents, or other private details.">Importante: nesta versão, as fotografias e os vídeos adicionados ficam guardados apenas neste navegador e dispositivo; não são enviados para a internet nem ficam visíveis para outras pessoas. Ao publicar o site, precisaremos de preparar um serviço de armazenamento para que a galeria seja partilhada com os visitantes. Não publiques imagens com morada, escola, documentos ou outros dados privados.</p>
+      </div>
+    </section>
+
+    <section id="journal">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow" data-pt="Pequenos passos contam" data-en="Small steps matter">Pequenos passos contam</div>
+          <h2 data-pt="O meu diário de aprendizagem" data-en="My learning journal">O meu diário de aprendizagem</h2>
+          <p data-pt="Regista o que aprendeste, o que correu bem e qual será o teu próximo passo. As entradas ficam guardadas neste navegador, neste dispositivo." data-en="Record what you learned, what went well, and your next step. Entries are saved in this browser on this device.">Regista o que aprendeste, o que correu bem e qual será o teu próximo passo. As entradas ficam guardadas neste navegador, neste dispositivo.</p>
+        </div>
+        <form class="journal-form" id="journalForm">
+          <div>
+            <label for="entryTitle" data-pt="Título da entrada" data-en="Entry title">Título da entrada</label>
+            <input id="entryTitle" name="entryTitle" required maxlength="90" placeholder="Ex.: Hoje aprendi HTML" data-pt-placeholder="Ex.: Hoje aprendi HTML" data-en-placeholder="E.g. Today I learned HTML">
+          </div>
+          <div>
+            <label for="entryCategory" data-pt="Tema" data-en="Topic">Tema</label>
+            <select id="entryCategory" name="entryCategory">
+              <option value="Idiomas" data-pt="Idiomas" data-en="Languages">Idiomas</option>
+              <option value="Programação" data-pt="Programação" data-en="Coding">Programação</option>
+              <option value="Tecnologia e robótica" data-pt="Tecnologia e robótica" data-en="Technology & robotics">Tecnologia e robótica</option>
+              <option value="Culturas e viagens" data-pt="Culturas e viagens" data-en="Cultures & travel">Culturas e viagens</option>
+              <option value="Pessoal" data-pt="Pessoal" data-en="Personal">Pessoal</option>
+            </select>
+          </div>
+          <div>
+            <label for="entryText" data-pt="O que aprendeste hoje?" data-en="What did you learn today?">O que aprendeste hoje?</label>
+            <textarea id="entryText" name="entryText" required maxlength="1200" placeholder="Escreve aqui a tua reflexão..." data-pt-placeholder="Escreve aqui a tua reflexão..." data-en-placeholder="Write your reflection here..."></textarea>
+          </div>
+          <button type="submit" data-pt="Guardar entrada" data-en="Save entry">Guardar entrada</button>
+          <small class="muted" data-pt="Nota: as entradas ficam neste navegador. Se limpares os dados do navegador ou mudares de dispositivo, podem desaparecer. Faz cópias de segurança do que quiseres guardar." data-en="Note: entries stay in this browser. If you clear browser data or switch devices, they may disappear. Make backups of anything you want to keep.">Nota: as entradas ficam neste navegador. Se limpares os dados do navegador ou mudares de dispositivo, podem desaparecer. Faz cópias de segurança do que quiseres guardar.</small>
+        </form>
+        <div class="journal-list" id="journalList" aria-live="polite">
+          <div class="empty-state" data-pt="Ainda não há entradas. Escreve a primeira acima!" data-en="No entries yet. Write your first one above!">Ainda não há entradas. Escreve a primeira acima!</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="learning">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow" data-pt="Curiosidade em ação" data-en="Curiosity in action">Curiosidade em ação</div>
+          <h2 data-pt="O que estou a aprender" data-en="What I'm learning">O que estou a aprender</h2>
+        </div>
+        <div class="grid">
+          <article class="card"><div class="icon" aria-hidden="true">💻</div><h3>HTML &amp; CSS</h3><p data-pt="Criar a estrutura e o estilo das páginas web." data-en="Building the structure and style of web pages.">Criar a estrutura e o estilo das páginas web.</p></article>
+          <article class="card"><div class="icon" aria-hidden="true">🌍</div><h3 data-pt="Idiomas" data-en="Languages">Idiomas</h3><p data-pt="Praticar idiomas de forma consistente e acompanhar o meu progresso." data-en="Practise languages consistently and track my progress.">Praticar idiomas de forma consistente e acompanhar o meu progresso.</p></article>
+          <article class="card"><div class="icon" aria-hidden="true">⚙️</div><h3 data-pt="Tecnologia e robótica" data-en="Technology & robotics">Tecnologia e robótica</h3><p data-pt="Aprender programação, informática e os princípios da robótica através de projetos." data-en="Learn programming, computer science, and robotics fundamentals through projects.">Aprender programação, informática e os princípios da robótica através de projetos.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="note">
+          <strong data-pt="Uma nota para o futuro:" data-en="A note for the future:">Uma nota para o futuro:</strong>
+          <span data-pt=" este site é um trabalho em progresso. Não preciso de o tornar perfeito hoje — posso melhorá-lo a cada nova aprendizagem." data-en=" this website is a work in progress. It doesn't need to be perfect today — I can improve it with every new thing I learn."> este site é um trabalho em progresso. Não preciso de o tornar perfeito hoje — posso melhorá-lo a cada nova aprendizagem.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>© <span id="year"></span> Rosa Álvaro</span>
+      <span data-pt="Feito com curiosidade e carinho." data-en="Made with curiosity and care.">Feito com curiosidade e carinho.</span>
+    </div>
+  </footer>
+
+  <script>
+    // O seletor oferece 14 idiomas através do Google Translate; requer internet.
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'pt',
+        includedLanguages: 'pt,en,fr,es,ko,zh-CN,ja,it,ru,tr,nl,de,ar,hi',
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+    const languageSelect = document.querySelector('#languageSelect');
+    languageSelect.addEventListener('change', function () {
+      const target = this.value;
+      if (target === 'pt') {
+        const combo = document.querySelector('.goog-te-combo');
+        if (combo) { combo.value = ''; combo.dispatchEvent(new Event('change')); }
+        else { location.reload(); }
+        return;
+      }
+      const tryTranslate = () => {
+        const combo = document.querySelector('.goog-te-combo');
+        if (!combo) return false;
+        combo.value = target;
+        combo.dispatchEvent(new Event('change'));
+        return true;
+      };
+      if (!tryTranslate()) {
+        // O widget pode demorar a carregar; o utilizador pode voltar a escolher o idioma.
+        const note = document.querySelector('#languageNotice');
+        if (note) note.hidden = false;
+      }
+    });
+
+    // JavaScript: mantém o seletor antigo interno para os textos PT/EN da galeria.
+    const languageButton = document.querySelector("#languageButton");
+    let currentLanguage = "pt";
+
+    function changeLanguage() {
+      currentLanguage = currentLanguage === "pt" ? "en" : "pt";
+      document.documentElement.lang = currentLanguage;
+
+      document.querySelectorAll("[data-pt], [data-en]").forEach((element) => {
+        const translation = element.dataset[currentLanguage];
+        if (translation !== undefined) element.textContent = translation;
+      });
+
+      document.querySelectorAll("[data-pt-html], [data-en-html]").forEach((element) => {
+        const translation = element.dataset[currentLanguage + "Html"];
+        if (translation !== undefined) element.innerHTML = translation;
+      });
+
+      languageButton.textContent = currentLanguage === "pt" ? "EN" : "PT";
+      languageButton.setAttribute(
+        "aria-label",
+        currentLanguage === "pt" ? "Switch to English" : "Mudar para português"
+      );
+      updatePlaceholders();
+      if (mediaDb) renderMediaGallery();
+    }
+
+    languageButton.addEventListener("click", () => changeLanguage());
+
+    // Atualiza também os textos de ajuda dos campos quando se muda de idioma.
+    function updatePlaceholders() {
+      document.querySelectorAll("[data-pt-placeholder], [data-en-placeholder]").forEach((element) => {
+        const value = element.dataset[currentLanguage + "Placeholder"];
+        if (value !== undefined) element.placeholder = value;
+      });
+    }
+
+    // A galeria guarda ficheiros no IndexedDB deste navegador; não os publica na internet.
+    const mediaForm = document.querySelector("#mediaUploadForm");
+    const mediaFileInput = document.querySelector("#mediaFile");
+    const mediaCaptionInput = document.querySelector("#mediaCaption");
+    const photoGrid = document.querySelector("#photoGrid");
+    const mediaStatus = document.querySelector("#mediaStatus");
+    const openMediaFormButton = document.querySelector("#openMediaForm");
+    const cancelMediaFormButton = document.querySelector("#cancelMediaForm");
+    const mediaDbName = "RosaAlvaroJourneyMediaDB";
+    const mediaStoreName = "gallery";
+    const mediaMaxVideoSeconds = 15 * 60;
+    let mediaDb = null;
+    let currentMediaUrls = [];
+
+    function openMediaDatabase() {
+      return new Promise((resolve, reject) => {
+        if (!("indexedDB" in window)) {
+          reject(new Error("Este navegador não suporta armazenamento de ficheiros."));
+          return;
+        }
+        const request = indexedDB.open(mediaDbName, 1);
+        request.onupgradeneeded = () => {
+          const db = request.result;
+          if (!db.objectStoreNames.contains(mediaStoreName)) {
+            db.createObjectStore(mediaStoreName, { keyPath: "id", autoIncrement: true });
+          }
+        };
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error || new Error("Não foi possível abrir o armazenamento."));
+      });
+    }
+
+    function getAllMedia() {
+      return new Promise((resolve, reject) => {
+        const transaction = mediaDb.transaction(mediaStoreName, "readonly");
+        const request = transaction.objectStore(mediaStoreName).getAll();
+        request.onsuccess = () => resolve(request.result || []);
+        request.onerror = () => reject(request.error);
+      });
+    }
+
+    function addMediaRecord(record) {
+      return new Promise((resolve, reject) => {
+        const transaction = mediaDb.transaction(mediaStoreName, "readwrite");
+        const request = transaction.objectStore(mediaStoreName).add(record);
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error || new Error("Não foi possível guardar o ficheiro."));
+      });
+    }
+
+    function deleteMediaRecord(id) {
+      return new Promise((resolve, reject) => {
+        const transaction = mediaDb.transaction(mediaStoreName, "readwrite");
+        const request = transaction.objectStore(mediaStoreName).delete(id);
+        request.onsuccess = () => resolve();
+        request.onerror = () => reject(request.error);
+      });
+    }
+
+    function getVideoDuration(file) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file);
+        const video = document.createElement("video");
+        video.preload = "metadata";
+        video.onloadedmetadata = () => {
+          const duration = video.duration;
+          URL.revokeObjectURL(url);
+          resolve(duration);
+        };
+        video.onerror = () => {
+          URL.revokeObjectURL(url);
+          reject(new Error("Não foi possível ler a duração deste vídeo."));
+        };
+        video.src = url;
+      });
+    }
+
+    function releaseMediaUrls() {
+      currentMediaUrls.forEach((url) => URL.revokeObjectURL(url));
+      currentMediaUrls = [];
+    }
+
+    async function renderMediaGallery() {
+      if (!mediaDb) return;
+      releaseMediaUrls();
+      const savedMedia = await getAllMedia();
+      const placeholders = photoGrid.querySelectorAll(".photo-card:not(.media-card), .empty-state");
+      placeholders.forEach((placeholder) => placeholder.remove());
+      photoGrid.querySelectorAll(".media-card").forEach((card) => card.remove());
+
+      if (savedMedia.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+        empty.dataset.mediaEmpty = "true";
+        empty.textContent = currentLanguage === "pt"
+          ? "Ainda não adicionaste fotografias ou vídeos. Usa o botão + para começar."
+          : "You haven't added any photos or videos yet. Use the + button to get started.";
+        photoGrid.appendChild(empty);
+        return;
+      }
+
+      savedMedia.forEach((item) => {
+        const card = document.createElement("figure");
+        card.className = "photo-card media-card";
+        const url = URL.createObjectURL(item.blob);
+        currentMediaUrls.push(url);
+        let mediaElement;
+        if (item.type.startsWith("video/")) {
+          mediaElement = document.createElement("video");
+          mediaElement.controls = true;
+          mediaElement.preload = "metadata";
+          mediaElement.playsInline = true;
+        } else {
+          mediaElement = document.createElement("img");
+          mediaElement.alt = item.caption || (currentLanguage === "pt" ? "Fotografia adicionada" : "Added photo");
+        }
+        mediaElement.src = url;
+        const caption = document.createElement("figcaption");
+        caption.textContent = item.caption || item.name || (item.type.startsWith("video/") ? "Vídeo" : "Fotografia");
+        const removeButton = document.createElement("button");
+        removeButton.type = "button";
+        removeButton.className = "remove-media";
+        removeButton.textContent = currentLanguage === "pt" ? "Eliminar" : "Delete";
+        removeButton.addEventListener("click", async () => {
+          const confirmed = window.confirm(currentLanguage === "pt"
+            ? `Queres eliminar “${caption.textContent}” da galeria deste dispositivo?`
+            : `Delete “${caption.textContent}” from this device's gallery?`);
+          if (!confirmed) return;
+          try {
+            await deleteMediaRecord(item.id);
+            await renderMediaGallery();
+          } catch {
+            mediaStatus.textContent = currentLanguage === "pt" ? "Não foi possível eliminar este ficheiro." : "Could not delete this file.";
+          }
+        });
+        card.append(mediaElement, caption, removeButton);
+        photoGrid.appendChild(card);
+      });
+    }
+
+    openMediaFormButton.addEventListener("click", () => {
+      const isOpen = mediaForm.classList.toggle("open");
+      openMediaFormButton.setAttribute("aria-expanded", String(isOpen));
+      if (isOpen) mediaFileInput.focus();
+    });
+
+    cancelMediaFormButton.addEventListener("click", () => {
+      mediaForm.reset();
+      mediaForm.classList.remove("open");
+      openMediaFormButton.setAttribute("aria-expanded", "false");
+      mediaStatus.textContent = "";
+    });
+
+    mediaForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const file = mediaFileInput.files && mediaFileInput.files[0];
+      if (!file) {
+        mediaStatus.textContent = currentLanguage === "pt" ? "Escolhe primeiro uma fotografia ou um vídeo." : "Choose a photo or video first.";
+        return;
+      }
+      const isImage = file.type.startsWith("image/");
+      const isVideo = file.type.startsWith("video/");
+      if (!isImage && !isVideo) {
+        mediaStatus.textContent = currentLanguage === "pt" ? "Este tipo de ficheiro não é suportado. Escolhe uma imagem ou um vídeo." : "This file type isn't supported. Choose an image or video.";
+        return;
+      }
+      if (isVideo) {
+        try {
+          const duration = await getVideoDuration(file);
+          if (!Number.isFinite(duration) || duration > mediaMaxVideoSeconds) {
+            mediaStatus.textContent = currentLanguage === "pt"
+              ? "O vídeo deve ter no máximo 15 minutos. Escolhe um vídeo mais curto."
+              : "Videos must be 15 minutes or shorter. Choose a shorter video.";
+            return;
+          }
+        } catch (error) {
+          mediaStatus.textContent = error.message;
+          return;
+        }
+      }
+      if (!mediaDb) {
+        mediaStatus.textContent = currentLanguage === "pt"
+          ? "O armazenamento local não está disponível neste navegador."
+          : "Local storage is not available in this browser.";
+        return;
+      }
+      mediaStatus.textContent = currentLanguage === "pt" ? "A guardar ficheiro neste dispositivo…" : "Saving file on this device…";
+      try {
+        await addMediaRecord({
+          name: file.name,
+          type: file.type,
+          size: file.size,
+          caption: mediaCaptionInput.value.trim(),
+          blob: file,
+          addedAt: new Date().toISOString()
+        });
+        mediaForm.reset();
+        mediaForm.classList.remove("open");
+        openMediaFormButton.setAttribute("aria-expanded", "false");
+        mediaStatus.textContent = currentLanguage === "pt"
+          ? "Adicionado à galeria deste dispositivo. Ainda não está publicado na internet."
+          : "Added to this device's gallery. It is not published online yet.";
+        await renderMediaGallery();
+      } catch (error) {
+        mediaStatus.textContent = currentLanguage === "pt"
+          ? "Não foi possível guardar. O ficheiro pode ser demasiado grande para o espaço disponível."
+          : "Could not save. The file may be too large for available browser storage.";
+      }
+    });
+
+    openMediaDatabase()
+      .then((db) => {
+        mediaDb = db;
+        renderMediaGallery().catch(() => {
+          mediaStatus.textContent = currentLanguage === "pt" ? "Não foi possível carregar a galeria." : "Could not load the gallery.";
+        });
+      })
+      .catch(() => {
+        mediaStatus.textContent = currentLanguage === "pt"
+          ? "O navegador não permite guardar ficheiros localmente. Podes ainda testar a seleção de ficheiros."
+          : "This browser cannot store files locally. You can still test file selection.";
+      });
+
+    // O diário usa armazenamento local do navegador; não envia as entradas para um servidor.
+    const journalForm = document.querySelector("#journalForm");
+    const journalList = document.querySelector("#journalList");
+    const storageKey = "rosaAlvaroJourneyEntriesV1";
+
+    function readEntries() {
+      try { return JSON.parse(localStorage.getItem(storageKey) || "[]"); }
+      catch { return []; }
+    }
+
+    function renderEntries() {
+      const entries = readEntries();
+      journalList.replaceChildren();
+
+      if (entries.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+        empty.textContent = currentLanguage === "pt"
+          ? "Ainda não há entradas. Escreve a primeira acima!"
+          : "No entries yet. Write your first one above!";
+        journalList.appendChild(empty);
+        return;
+      }
+
+      entries.slice().reverse().forEach((entry) => {
+        const article = document.createElement("article");
+        article.className = "journal-entry";
+        const title = document.createElement("h3");
+        title.textContent = entry.title;
+        const meta = document.createElement("div");
+        meta.className = "journal-meta";
+        meta.textContent = `${entry.category} · ${entry.date}`;
+        const paragraph = document.createElement("p");
+        paragraph.textContent = entry.text;
+        article.append(title, meta, paragraph);
+        journalList.appendChild(article);
+      });
+    }
+
+    journalForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const title = document.querySelector("#entryTitle").value.trim();
+      const category = document.querySelector("#entryCategory").value;
+      const entryText = document.querySelector("#entryText").value.trim();
+      if (!title || !entryText) return;
+
+      const entries = readEntries();
+      entries.push({
+        title,
+        category,
+        text: entryText,
+        date: new Date().toLocaleDateString(currentLanguage === "pt" ? "pt-PT" : "en-GB")
+      });
+      localStorage.setItem(storageKey, JSON.stringify(entries));
+      journalForm.reset();
+      renderEntries();
+    });
+
+    // Reapresenta as entradas e os campos quando o visitante muda o idioma.
+    const originalChangeLanguage = changeLanguage;
+    changeLanguage = function () {
+      originalChangeLanguage();
+      updatePlaceholders();
+      renderEntries();
+    };
+    updatePlaceholders();
+    renderEntries();
+
+    document.querySelector("#year").textContent = new Date().getFullYear();
+  </script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
